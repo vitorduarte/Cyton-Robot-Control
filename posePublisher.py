@@ -80,7 +80,7 @@ def moveCallback(move):
 		poseToSend.data = pose	
 		print(poseToSend)
 		pubPose.publish(poseToSend)
-		rospy.sleep(3)
+		#rospy.sleep(3)
 
 	print('movement finished')
 	eventToSend = String()
