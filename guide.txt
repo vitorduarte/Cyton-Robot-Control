@@ -1,0 +1,46 @@
+Guia do package automato:
+
+1o - Ligar fonte, arduíno e conectar (se estiver simulando, pule este passo)
+	rosrun rosserial_python serial_node.py _port:=/dev/ttyUSB0 _baud:=57600
+	(caso a conexão falhe, conectar na 9600, desconectar e tentar novamente com a 57600)
+
+2o - Executar posePublisher.py
+	rosrun automato posePublisher.py
+
+3o - Executar automato.py
+	rosrun automato automato.py
+
+4o - Executar inputNode.py
+	rosrun automato inputNode.py
+
+Lista de Movimentos:
+	Estes são os valores inteiros que devem ser passados para a função "sendMovement()".
+
+	sendMovement(0): "redLoad", busca peça no buffer de entrada e deixa no processo "R";
+	sendMovement(1): "greenLoad", busca peça no buffer de entrada e deixa no processo "L";
+	sendMovement(2): "redUnload", busca peça no processo "R" e deixa no buffer de saída;
+	sendMovement(3): "greenUnload", busca peça no processo "G" e deixa no buffer de saída;
+	sendMovement(4): "red2Green", busca peça no processo "R" e deixa no processo "G"
+
+Lista de eventos:
+	Não controláveis:
+
+		cytonIdle: cyton terminou a tarefa
+		redNew e greenNew: nova peça no buffer de entrada
+		greenDone e redDone: processos G e R terminados, respectivamente
+
+	Controláveis:
+
+		greenLoad e redLoad: Cyton começa o movimento de buscar peça no buffer de entrada e botar no processo G ou R
+		greenUnload e redUnload: Cyton começa o movimento de buscar peça no processo G ou R e botar no buffer de saída
+		red2Green: Cyton começa o movimento de buscar peça no processo R e botar no processo G
+
+
+Notas:
+	- Aqueles que quiserem testar o programa, ao criar o package de ros, colar os .py em catkin_ws/src/nomeDoPackage/scripts
+	- Os arquivos devem ter permissão para execução
+		chmod +x automato.py inputNode.py posePublisher.py
+	- É possível imprimir na tela o que está sendo publicado nos tópicos com o comando
+		rostopic echo /nomeDoTopico
+	- É possível também publicar no tópico a partir da linha de comando
+		roptopic pub /nomeDoTopico tab tab tab também
