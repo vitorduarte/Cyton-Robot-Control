@@ -57,17 +57,6 @@ def idle():
             state = loadingGreen
             break
 
-        #Maquina finalizou uma peça vermelha
-        #elif newEvent == 'redDone':
-			#newEvent = 'none'
-			#state = unloadingRed
-			#break
-
-        #Maquina finalizou uma peça verde
-        #elif newEvent == 'greenDone':
-			#newEvent = 'none'
-			#state = unloadingGreen
-			#break
 
 # Iniciando R
 def loadingRed():
@@ -134,8 +123,8 @@ def waitingGreen():
             break
 
 # Iniciando R e esperando finalizar G
-def loadingRedWatingRed():
-    print('Loading Red')
+def loadingRedWatingGreen():
+    print('Loading Red and Wating Green')
     
     global state
     global newEvent
@@ -150,7 +139,7 @@ def loadingRedWatingRed():
 
 # Iniciando G e esperando finalizar R
 def loadingGreenWatingRed():
-    print('Loading Green')
+    print('Loading Green and Wating Red')
     
     global state
     global newEvent
